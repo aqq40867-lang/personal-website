@@ -1,0 +1,163 @@
+/* ===============================
+   Global Reset
+================================ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ===============================
+   Color System (Ocean Depth)
+================================ */
+:root {
+  --ocean-surface: #bfe9ff;   /* 天空 / 海面 */
+  --ocean-light:   #0a6fdc;   /* 浅海 */
+  --ocean-mid:     #061a2d;   /* 中层海 */
+  --ocean-deep:    #04101c;   /* 深海 */
+  --ocean-abyss:   #020812;   /* 深渊 */
+}
+
+/* ===============================
+   Body = One Continuous Ocean
+================================ */
+body {
+  font-family: "Rajdhani", sans-serif;
+  color: rgba(255,255,255,0.85);
+  overflow-x: hidden;
+
+  /* ⭐ 核心：整站纵向渐变 */
+  background: linear-gradient(
+    to bottom,
+    var(--ocean-surface) 0%,
+    var(--ocean-light) 18%,
+    var(--ocean-mid) 45%,
+    var(--ocean-deep) 70%,
+    var(--ocean-abyss) 100%
+  );
+}
+
+/* ===============================
+   Three.js Canvas
+================================ */
+#webgl {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+}
+
+/* ===============================
+   Content Layer
+================================ */
+#content {
+  position: relative;
+  z-index: 1;
+}
+
+/* ===============================
+   Scene Base (No Background!)
+================================ */
+.scene {
+  min-height: 100vh;
+  padding: 80px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  /* reveal animation */
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+.scene.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===============================
+   Intro (Surface Text Style)
+================================ */
+.intro {
+  color: var(--ocean-mid);
+}
+
+.intro h1 {
+  font-size: 4rem;
+  letter-spacing: 4px;
+}
+
+.subtitle {
+  margin-top: 12px;
+  letter-spacing: 2px;
+}
+
+/* ===============================
+   Text Sections
+================================ */
+.about {
+  font-size: 1.4rem;
+  line-height: 1.8;
+}
+
+.work,
+.projects,
+.contact {
+  font-size: 1.2rem;
+}
+
+/* ===============================
+   UI Elements
+================================ */
+.label {
+  color: rgba(255,255,255,0.6);
+  letter-spacing: 2px;
+  margin-bottom: 24px;
+}
+
+.item {
+  color: rgba(255,255,255,0.85);
+  text-decoration: none;
+  font-size: 1.3rem;
+  margin-bottom: 18px;
+  padding-left: 12px;
+  border-left: 3px solid rgba(255,255,255,0.2);
+  transition: 0.3s;
+}
+
+.item:hover {
+  color: #ffffff;
+  border-left-color: #2fb7ff;
+  transform: translateX(6px);
+}
+
+.email {
+  font-size: 1.4rem;
+  letter-spacing: 1px;
+}
+
+/* ===============================
+   Responsive
+================================ */
+@media (max-width: 768px) {
+  .scene {
+    padding: 40px;
+  }
+
+  .intro h1 {
+    font-size: 2.8rem;
+  }
+}
+
+/* ===============================
+   Depth-based Text Effect
+================================ */
+.scene {
+  --depth-opacity: 1;
+  --depth-blur: 0px;
+
+  color: rgba(255,255,255,var(--depth-opacity));
+  filter: blur(var(--depth-blur));
+  transition: color 0.4s ease, filter 0.4s ease;
+}
